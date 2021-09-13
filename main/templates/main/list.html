@@ -1,0 +1,39 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+View List
+{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h2>{{ls.name}}</h2>
+<form method="post" , action="#" class="form-group">
+    {% csrf_token %}
+
+    {% for item in ls.item_set.all %}
+    <div class="input-group mb-3">
+        <div class="input-group-text">
+            <input class="form-check-input mt-0" type="checkbox" name="c{{item.id}}" value="clicked"
+                aria-label="Checkbox for following text input" {% if item.complete %} checked {% endif %}>
+        </div>
+        <input type="text" name="text{{item.id}}" value="{{item.text}}" class="form-control"
+            aria-label="Text input with checkbox">
+    </div>
+    {% endfor %}
+
+    <div class="input-group mb-3 d-grid d-md-flex justify-content-md-end">
+        <div class="input-group-text">
+            <input type="text" name="new" value="" class="form-control mb-1">
+        </div>
+        <button name="add" value="add" type="submit" , class="btn btn-success right">Add Item</button>
+    </div>
+    <br>
+    <div class="d-grid gap-2 col-3 mx-auto">
+        <button name="save" , value="save" , type="submit" , class="btn btn-success btn-large">Save</button>
+    </div>
+</form>
+{% else %}
+    <p>Login <a href="/login">here</a></p>
+{% endif %}
+{% endblock %}
+{% endblock %}

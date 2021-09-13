@@ -1,0 +1,20 @@
+{% extends "main/base.html" %}
+
+{% block title %}View{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <h1>My TODO</h1>
+    {% if lenght > 0 %}
+    {% for td in user.todolist.all %}
+    <ul class="list-group list-group-flush">
+        <li><a  class="list-group-item" href="/{{td.id}}">{{td.name}}</a></li>
+    </ul>   
+    {% endfor %}
+    {% else %}
+    <h3>You have nothing todo</h3>
+    {% endif%}
+{% else %}
+    <p>Login <a href="/login">here</a></p>
+{% endif %}
+{% endblock %}

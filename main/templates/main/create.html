@@ -1,0 +1,25 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+Create New List
+{% endblock %}
+
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<h3>Create Todo list</h3>
+<br>
+<form method="POST" action="/create/" class="form-group">
+    {% csrf_token %}
+    <div class="input-group mb-3">
+        <div class="input-group-text">
+            {{form.name}}
+        </div>
+        <button type="submit" , name="save" class="btn btn-success"> Create New</button>
+    </div>
+</form>
+{% else %}
+    <p>Login <a href="/login">here</a></p>
+{% endif %}
+{% endblock %}
